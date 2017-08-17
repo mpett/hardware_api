@@ -3,6 +3,14 @@ using RestSharp;
 
 namespace frontend
 {
+    class Hardware
+    {
+        public int id;
+        public string name;
+        public string platform;
+        public string ip;
+        public bool leased;
+    }
     class Program
     {
         static void Main(string[] args)
@@ -11,6 +19,20 @@ namespace frontend
             ListAllHardware(client);
             ListPlatformFilteredHardware(client, "PC");
             ListActiveLeases(client);
+            AddHardware(client, "Mechanical Keyboard", "PC", "Cherry");
+        }
+
+        static void AddHardware(RestClient client, string passedName, string passedPlatform, string passedIp)
+        {
+            var request = new RestRequest("todo/api/v1.0/hardware_list", Method.POST);
+            request.RequestFormat = DataFormat.Json;
+            request.AddBody( new Hardware
+            {
+                name = passedName,
+                platform = passedPlatform,
+                ip = passedIp
+            });
+            client.Execute(request);
         }
 
         static void ListAllHardware(RestClient client) {
