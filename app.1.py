@@ -59,7 +59,6 @@ def update_hardware(hardware_id):
     hardware = [hardware for hardware in hardware_list if hardware['id'] == hardware_id]
     if len(hardware) == 0:
         abort(404)
-
     if not request.json:
         abort(400)
     if 'name' in request.json and type(request.json['name']) != unicode:
