@@ -16,10 +16,47 @@ namespace frontend
         static void Main(string[] args)
         {
             var client = new RestClient("http://localhost:5000");
-            ListAllHardware(client);
-            ListPlatformFilteredHardware(client, "PC");
-            ListActiveLeases(client);
-            AddHardware(client, "Mechanical Keyboard", "PC", "Cherry"); 
+            
+            bool applicationIsRunning = true;
+            
+            do { 
+                
+                Console.WriteLine("Welcome to the Hardware Store!");
+                Console.WriteLine("-----------------------------------");
+                Console.WriteLine("1. List all hardware.");
+                Console.WriteLine("2. List all hardware filtered on platform.");
+                Console.WriteLine("3. Show active leases.");
+                Console.WriteLine("4. Add new hardware.");
+                Console.WriteLine("5. Lease hardware.");
+                Console.WriteLine("-----------------------------------");
+                Console.WriteLine("6. Exit application.");
+
+                string input = Console.ReadLine();
+                
+                switch(input) {
+                    case "1":
+                        ListAllHardware(client);
+                        break;
+                    case "2":
+                        ListPlatformFilteredHardware(client, "PC");
+                        break;
+                    case "3":
+                        ListActiveLeases(client);
+                        break;
+                    case "4":
+                        AddHardware(client, "Mechanical Keyboard", "PC", "Cherry"); 
+                        break;
+                    case "5":
+                        Lease(client, 5);
+                        break;
+                    case "6":
+                        applicationIsRunning = false;
+                        break;
+                    default:
+                        Console.WriteLine("Would you kindly select a valid option?");
+                        break;
+                }
+            } while(applicationIsRunning);
         }
 
         static void AddHardware(RestClient client, string passedName, string passedPlatform, string passedIp)
