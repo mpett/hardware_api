@@ -9,7 +9,7 @@ namespace frontend
         {
             var client = new RestClient("http://localhost:5000");
             ListAllHardware(client);
-            ListPlatformFilteredHardware(client, "PC");
+            ListPlatformFilteredHardware(client, "PS4");
         }
 
         static void ListAllHardware(RestClient client) {
@@ -20,8 +20,7 @@ namespace frontend
         }
 
         static void ListPlatformFilteredHardware(RestClient client, string platform) {
-            Console.WriteLine(platform);
-            var request = new RestRequest("todo/api/v1.0/hardware_list", Method.GET);
+            var request = new RestRequest("todo/api/v1.0/hardware_list/" + platform, Method.GET);
             IRestResponse response = client.Execute(request);
             var content = response.Content;
             Console.WriteLine(content);

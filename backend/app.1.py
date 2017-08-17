@@ -17,6 +17,13 @@ hardware_list = [
         'platform': u'PS4',
         'ip': u'Seagate',  
         'leased': False
+    },
+    {
+        'id': 3,
+        'name': u'GTX 1080',
+        'platform': u'PC', 
+        'ip': u'nVIDIA', 
+        'leased': False
     }
 ]
 
@@ -45,7 +52,7 @@ def get_hardware_by_platform(hardware_platform):
     hardware = [hardware for hardware in hardware_list if hardware['platform'] == hardware_platform]
     if len(hardware) == 0:
         abort(404)
-    return jsonify({'hardware' : hardware[0]})
+    return jsonify({'hardware' : hardware})
 
 @app.route('/todo/api/v1.0/hardware_list', methods=['POST'])
 def create_hardware():
