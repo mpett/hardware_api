@@ -6,14 +6,16 @@ app = Flask(__name__)
 hardware_list = [
     {
         'id': 1,
-        'title': u'Buy groceries',
-        'description': u'Milk, Cheese, Pizza, Fruit, Tylenol', 
+        'name': u'GTX Titan',
+        'platform': u'PC', 
+        'ip': u'nVIDIA', 
         'leased': False
     },
     {
         'id': 2,
-        'title': u'Learn Python',
-        'description': u'Need to find a good Python tutorial on the web', 
+        'name': u'1 TB Hard Drive',
+        'platform': u'PS4',
+        'ip': u'Seagate',  
         'leased': False
     }
 ]
@@ -40,12 +42,13 @@ def get_hardware(hardware_id):
 
 @app.route('/todo/api/v1.0/hardware_list', methods=['POST'])
 def create_hardware():
-    if not request.json or not 'title' in request.json:
+    if not request.json or not 'name' in request.json:
         abort(400)
     hardware = {
         'id' : hardware_list[-1]['id'] + 1,
-        'title' : request.json['title'],
-        'description' : request.json.get('description', ""),
+        'name' : request.json['name'],
+        'platform' : request.json.get('platform', ""),
+        'ip' : request.json.get('ip', ""),
         'leased' : False
     }
     hardware_list.append(hardware)
@@ -56,16 +59,20 @@ def update_hardware(hardware_id):
     hardware = [hardware for hardware in hardware_list if hardware['id'] == hardware_id]
     if len(hardware) == 0:
         abort(404)
+
     if not request.json:
         abort(400)
-    if 'title' in request.json and type(request.json['title']) != unicode:
+    if 'name' in request.json and type(request.json['name']) != unicode:
         abort(400)
-    if 'description' in request.json and type(request.json['description']) is not unicode:
+    if 'platform' in request.json and type(request.json['platform']) is not unicode:
+        abort(400)
+    if 'ip' in request.json and type(request.json['ip']) is not unicode:
         abort(400)
     if 'leased' in request.json and type(request.json['leased']) is not bool:
         abort(400)
-    hardware[0]['title'] = request.json.get('title', hardware[0]['title'])
-    hardware[0]['description'] = request.json.get('description', hardware[0]['description'])
+    hardware[0]['name'] = request.json.get('name', hardware[0]['name'])
+    hardware[0]['platform'] = request.json.get('platform', hardware[0]['platform'])
+    hardware[0]['ip'] = request.json.get('ip', hardware[0]['ip'])
     hardware[0]['leased'] = request.json.get('leased', hardware[0]['leased'])
     return jsonify({'hardware': hardware[0]})
 
