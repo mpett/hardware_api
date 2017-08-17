@@ -9,7 +9,7 @@ namespace frontend
         {
             var client = new RestClient("http://localhost:5000");
             ListAllHardware(client);
-            ListPlatformFilteredHardware(client, "PS4");
+            ListPlatformFilteredHardware(client, "PC");
         }
 
         static void ListAllHardware(RestClient client) {

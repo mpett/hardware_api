@@ -9,7 +9,7 @@ hardware_list = [
         'name': u'GTX Titan',
         'platform': u'PC', 
         'ip': u'nVIDIA', 
-        'leased': False
+        'leased': True
     },
     {
         'id': 2,
@@ -23,7 +23,7 @@ hardware_list = [
         'name': u'GTX 1080',
         'platform': u'PC', 
         'ip': u'nVIDIA', 
-        'leased': False
+        'leased': True
     }
 ]
 
@@ -50,6 +50,13 @@ def get_hardware(hardware_id):
 @app.route('/todo/api/v1.0/hardware_list/<string:hardware_platform>', methods=['GET'])
 def get_hardware_by_platform(hardware_platform):
     hardware = [hardware for hardware in hardware_list if hardware['platform'] == hardware_platform]
+    if len(hardware) == 0:
+        abort(404)
+    return jsonify({'hardware' : hardware})
+
+@app.route('/todo/api/v1.0/active_leases', methods=['GET'])
+def get_active_leases():
+    hardware = [hardware for hardware in hardware_list if hardware['leased']]
     if len(hardware) == 0:
         abort(404)
     return jsonify({'hardware' : hardware})
