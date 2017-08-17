@@ -1,0 +1,6 @@
+curl -i http://localhost:5000/todo/api/v1.0/hardware_list
+curl -i http://localhost:5000/todo/api/v1.0/hardware_list/2
+curl -i http://localhost:5000/todo/api/v1.0/hardware_list/3
+curl -i -H "Content-Type: application/json" -X POST -d '{"name":"256 MB Flash Memory"}' http://localhost:5000/todo/api/v1.0/hardware_list
+curl -i http://localhost:5000/todo/api/v1.0/hardware_list
+curl -i -H "Content-Type: application/json" -X PUT -d '{"leased":true}' http://localhost:5000/todo/api/v1.0/hardware_list/2
