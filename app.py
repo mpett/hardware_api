@@ -1,5 +1,5 @@
 #!flask/bin/python
-from flask import Flask, jsonify, abort, make_response, request
+from flask import Flask, jsonify, abort, make_response, request, url_for
 
 app = Flask(__name__)
 
@@ -18,9 +18,18 @@ tasks = [
     }
 ]
 
+def make_public_task(task):
+    new_task = {}
+    for field in task:
+        if field == 'id':
+            new_task['uri'] = url_for('get_task', task_id=task['id'], _external=True)
+        else:
+            new_task[field] = task[field]
+    return new_task
+
 @app.route('/todo/api/v1.0/tasks', methods=['GET'])
 def get_tasks():
-    return jsonify({'tasks' : tasks})
+    return jsonify({'tasks' : [make_public_task(task) for task in tasks]})
 
 @app.route('/todo/api/v1.0/tasks/<int:task_id>', methods=['GET'])
 def get_task(task_id):
@@ -71,11 +80,6 @@ def delete_task(task_id):
 @app.errorhandler(404)
 def not_found(error):
     return make_response(jsonify({'error' : 'Not Found'}), 404)
-
-@app.route('/')
-
-def index():
-    return "Hello World"
 
 if __name__ == '__main__':
     app.run(debug=True)
