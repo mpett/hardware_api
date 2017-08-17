@@ -19,7 +19,7 @@ namespace frontend
             ListAllHardware(client);
             ListPlatformFilteredHardware(client, "PC");
             ListActiveLeases(client);
-            AddHardware(client, "Mechanical Keyboard", "PC", "Cherry");
+            AddHardware(client, "Mechanical Keyboard", "PC", "Cherry"); 
         }
 
         static void AddHardware(RestClient client, string passedName, string passedPlatform, string passedIp)
@@ -31,6 +31,17 @@ namespace frontend
                 name = passedName,
                 platform = passedPlatform,
                 ip = passedIp
+            });
+            client.Execute(request);
+        }
+
+        static void Lease(RestClient client, int passedId)
+        {
+            var request = new RestRequest("todo/api/v1.0/hardware_list/" + passedId, Method.PUT);
+            request.RequestFormat = DataFormat.Json;
+            request.AddBody( new Hardware
+            {
+                leased = true
             });
             client.Execute(request);
         }
