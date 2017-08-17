@@ -1,0 +1,10 @@
+/Users/martin.pettersson/random_repos/todo_api/frontend/bin/Debug/netcoreapp2.0/frontend.deps.json
+/Users/martin.pettersson/random_repos/todo_api/frontend/bin/Debug/netcoreapp2.0/frontend.runtimeconfig.json
+/Users/martin.pettersson/random_repos/todo_api/frontend/bin/Debug/netcoreapp2.0/frontend.runtimeconfig.dev.json
+/Users/martin.pettersson/random_repos/todo_api/frontend/bin/Debug/netcoreapp2.0/frontend.dll
+/Users/martin.pettersson/random_repos/todo_api/frontend/bin/Debug/netcoreapp2.0/frontend.pdb
+/Users/martin.pettersson/random_repos/todo_api/frontend/obj/Debug/netcoreapp2.0/frontend.csproj.CoreCompileInputs.cache
+/Users/martin.pettersson/random_repos/todo_api/frontend/obj/Debug/netcoreapp2.0/frontend.AssemblyInfoInputs.cache
+/Users/martin.pettersson/random_repos/todo_api/frontend/obj/Debug/netcoreapp2.0/frontend.AssemblyInfo.cs
+/Users/martin.pettersson/random_repos/todo_api/frontend/obj/Debug/netcoreapp2.0/frontend.dll
+/Users/martin.pettersson/random_repos/todo_api/frontend/obj/Debug/netcoreapp2.0/frontend.pdb
