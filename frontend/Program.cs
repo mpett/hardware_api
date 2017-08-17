@@ -10,6 +10,7 @@ namespace frontend
             var client = new RestClient("http://localhost:5000");
             ListAllHardware(client);
             ListPlatformFilteredHardware(client, "PC");
+            ListActiveLeases(client);
         }
 
         static void ListAllHardware(RestClient client) {
@@ -21,6 +22,13 @@ namespace frontend
 
         static void ListPlatformFilteredHardware(RestClient client, string platform) {
             var request = new RestRequest("todo/api/v1.0/hardware_list/" + platform, Method.GET);
+            IRestResponse response = client.Execute(request);
+            var content = response.Content;
+            Console.WriteLine(content);
+        }
+
+        static void ListActiveLeases(RestClient client) {
+            var request = new RestRequest("todo/api/v1.0/active_leases", Method.GET);
             IRestResponse response = client.Execute(request);
             var content = response.Content;
             Console.WriteLine(content);
