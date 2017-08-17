@@ -8,6 +8,11 @@ namespace frontend
         static void Main(string[] args)
         {
             var client = new RestClient("http://localhost:5000");
+            ListAllHardware(client);
+            
+        }
+
+        static void ListAllHardware(RestClient client) {
             var request = new RestRequest("todo/api/v1.0/hardware_list", Method.GET);
             IRestResponse response = client.Execute(request);
             var content = response.Content;
