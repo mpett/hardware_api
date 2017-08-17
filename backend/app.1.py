@@ -40,6 +40,13 @@ def get_hardware(hardware_id):
         abort(404)
     return jsonify({'hardware' : hardware[0]})
 
+@app.route('/todo/api/v1.0/hardware_list/<string:hardware_platform>', methods=['GET'])
+def get_hardware_by_platform(hardware_platform):
+    hardware = [hardware for hardware in hardware_list if hardware['platform'] == hardware_platform]
+    if len(hardware) == 0:
+        abort(404)
+    return jsonify({'hardware' : hardware[0]})
+
 @app.route('/todo/api/v1.0/hardware_list', methods=['POST'])
 def create_hardware():
     if not request.json or not 'name' in request.json:
