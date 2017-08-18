@@ -34,9 +34,14 @@ namespace frontend
                         Console.ReadLine();
                         break;
                     case "2":
-                        Console.Write("Would you kindly type the platform name: ");
-                        string platformInput = Console.ReadLine();
-                        ListPlatformFilteredHardware(client, platformInput);
+                        try {
+                            Console.Write("Would you kindly type the platform name: ");
+                            string platformInput = Console.ReadLine();
+                            ListPlatformFilteredHardware(client, platformInput);
+                            
+                        } catch (FormatException e) {
+                            Console.WriteLine("The input you specified is not valid. Would you kindly try again?");
+                        }
                         Console.WriteLine("\nHit 'Return' to continue.");
                         Console.ReadLine();
                         break;
@@ -46,23 +51,33 @@ namespace frontend
                         Console.ReadLine();
                         break;
                     case "4":
-                        Console.Write("\nWould you kindly type the hardware name: ");
-                        string newNameInput = Console.ReadLine();
-                        Console.Write("\n\n... and platform: ");
-                        string newPlatformInput = Console.ReadLine();
-                        Console.Write("\n\n... and finally the IP: ");
-                        string newIpInput = Console.ReadLine();
-                        AddHardware(client, newNameInput, newPlatformInput, newIpInput); 
+                        try {
+                            Console.Write("\nWould you kindly type the hardware name: ");
+                            string newNameInput = Console.ReadLine();
+                            Console.Write("\n\n... and platform: ");
+                            string newPlatformInput = Console.ReadLine();
+                            Console.Write("\n\n... and finally the IP: ");
+                            string newIpInput = Console.ReadLine();
+                            AddHardware(client, newNameInput, newPlatformInput, newIpInput); 
+                        } catch (FormatException e) {
+                            Console.WriteLine("The input you specified is not valid. Would you kindly try again?");
+                        }
                         Console.WriteLine("\nNew hardware was added.");
                         Console.WriteLine("\nHit 'Return' to continue.");
                         Console.ReadLine();
                         break;
                     case "5":
-                        Console.Write("\nWould you kindly enter the id for the hardware you would like to lease: ");
-                        int leaseID = Int32.Parse(Console.ReadLine());
-                        Console.Write("\nDuration of lease: ");
-                        int duration = Int32.Parse(Console.ReadLine());
-                        Lease(client, leaseID, duration);
+                        try {
+                            Console.Write("\nWould you kindly enter the id for the hardware you would like to lease: ");
+                            int leaseID = Int32.Parse(Console.ReadLine());
+                            Console.Write("\nDuration of lease: ");
+                            int duration = Int32.Parse(Console.ReadLine());
+                            Lease(client, leaseID, duration);
+                        } catch (FormatException e) {
+                            Console.WriteLine("The input you specified is not valid. Would you kindly try again?");
+                        } catch (System.OverflowException e) {
+                            Console.WriteLine("Something went horribly wrong. Would you kindly try again?");
+                        }
                         Console.WriteLine("\nHit 'Return' to continue.");
                         Console.ReadLine();
                         break;
