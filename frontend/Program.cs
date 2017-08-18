@@ -15,19 +15,6 @@ namespace frontend
         public int time_left_on_lease {get;set;}
     }
 
-     public class Account
-{
-    public string Email { get; set; }
-    public bool Active { get; set; }
-    public DateTime CreatedDate { get; set; }
-    public IList<string> Roles { get; set; }
-}
-
-    public class HardwareList
-    {
-        public List<Hardware> hardwares {get;set;}
-    }
-
     class Program
     {
         static void Main(string[] args)
@@ -53,7 +40,6 @@ namespace frontend
                             Console.Write("Would you kindly type the platform name: ");
                             string platformInput = Console.ReadLine();
                             ListPlatformFilteredHardware(client, platformInput);
-                            
                         } catch (FormatException e) {
                             Console.WriteLine("The input you specified is not valid. Would you kindly try again?");
                         }
