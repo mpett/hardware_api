@@ -10,6 +10,7 @@ namespace frontend
         public string platform;
         public string ip;
         public bool leased;
+        public int time_left_on_lease;
     }
 
     class Program
@@ -121,7 +122,7 @@ namespace frontend
             });
             client.Execute(request);
         }
-        
+
         static void Lease(RestClient client, int passedId)
         {
             var request = new RestRequest("todo/api/v1.0/lease/" + passedId, Method.PUT);
