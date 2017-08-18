@@ -155,16 +155,22 @@ namespace frontend
         }
 
         static void DeserializeAndDisplayResponse(string content) {
-            List<Hardware> response = JsonConvert.DeserializeObject<List<Hardware>>(content);
-            foreach(Hardware hardware in response) {
-                Console.WriteLine("\n\n------------------------------------------");
-                Console.WriteLine("ID: " + hardware.id);
-                Console.WriteLine("NAME: " + hardware.name);
-                Console.WriteLine("PLATFORM: " + hardware.platform);
-                Console.WriteLine("IP: " + hardware.ip);
-                Console.WriteLine("LEASED: " + hardware.leased);
-                Console.WriteLine("TIME LEFT ON LEASE: " + hardware.time_left_on_lease);
-                Console.WriteLine("------------------------------------------");
+            try {
+                List<Hardware> response = JsonConvert.DeserializeObject<List<Hardware>>(content);
+                foreach(Hardware hardware in response) 
+                {
+                    Console.WriteLine("\n\n------------------------------------------");
+                    Console.WriteLine("ID: " + hardware.id);
+                    Console.WriteLine("NAME: " + hardware.name);
+                    Console.WriteLine("PLATFORM: " + hardware.platform);
+                    Console.WriteLine("IP: " + hardware.ip);
+                    Console.WriteLine("LEASED: " + hardware.leased);
+                    Console.WriteLine("TIME LEFT ON LEASE: " + hardware.time_left_on_lease);
+                    Console.WriteLine("------------------------------------------");
+                }
+            } catch (Newtonsoft.Json.JsonSerializationException e) 
+            {
+                Console.WriteLine("\nEither there are no results or something went wrong.");
             }
         }
     }
