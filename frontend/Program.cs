@@ -32,7 +32,9 @@ namespace frontend
                         Console.ReadLine();
                         break;
                     case "2":
-                        ListPlatformFilteredHardware(client, "PC");
+                        Console.Write("Would you kindly type the platform name: ");
+                        string platformInput = Console.ReadLine();
+                        ListPlatformFilteredHardware(client, platformInput);
                         Console.WriteLine("\nHit 'Return' to continue.");
                         Console.ReadLine();
                         break;
@@ -42,8 +44,14 @@ namespace frontend
                         Console.ReadLine();
                         break;
                     case "4":
-                        AddHardware(client, "Mechanical Keyboard", "PC", "Cherry"); 
-                        Console.WriteLine("New hardware was added.");
+                        Console.Write("\nWould you kindly type the hardware name: ");
+                        string newNameInput = Console.ReadLine();
+                        Console.Write("\n\n... and platform: ");
+                        string newPlatformInput = Console.ReadLine();
+                        Console.Write("\n\n... and finally the IP: ");
+                        string newIpInput = Console.ReadLine();
+                        AddHardware(client, newNameInput, newPlatformInput, newIpInput); 
+                        Console.WriteLine("\nNew hardware was added.");
                         Console.WriteLine("\nHit 'Return' to continue.");
                         Console.ReadLine();
                         break;
@@ -58,7 +66,7 @@ namespace frontend
                         break;
                     default:
                         Console.WriteLine("Would you kindly select a valid option?");
-                        Console.WriteLine("\nHit 'Return' to continue.");
+                        Console.WriteLine("\nHit 'Return' key to continue.");
                         Console.ReadLine();
                         break;
                 }
