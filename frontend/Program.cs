@@ -15,48 +15,66 @@ namespace frontend
     {
         static void Main(string[] args)
         {
-            var client = new RestClient("http://localhost:5000");
-            
-            bool applicationIsRunning = true;
-            
-            do { 
-                
-                Console.WriteLine("Welcome to the Hardware Store!");
-                Console.WriteLine("-----------------------------------");
-                Console.WriteLine("1. List all hardware.");
-                Console.WriteLine("2. List all hardware filtered on platform.");
-                Console.WriteLine("3. Show active leases.");
-                Console.WriteLine("4. Add new hardware.");
-                Console.WriteLine("5. Lease hardware.");
-                Console.WriteLine("-----------------------------------");
-                Console.WriteLine("6. Exit application.");
+            RunClient();
+        }
 
+        static void RunClient() {
+            var client = new RestClient("http://localhost:5000");
+            bool applicationIsRunning = true;
+            do { 
+                Console.Clear();
+                ShowMenu();
                 string input = Console.ReadLine();
-                
                 switch(input) {
                     case "1":
                         ListAllHardware(client);
+                        Console.WriteLine("\nHit 'Return' to continue.");
+                        Console.ReadLine();
                         break;
                     case "2":
                         ListPlatformFilteredHardware(client, "PC");
+                        Console.WriteLine("\nHit 'Return' to continue.");
+                        Console.ReadLine();
                         break;
                     case "3":
                         ListActiveLeases(client);
+                        Console.WriteLine("\nHit 'Return' to continue.");
+                        Console.ReadLine();
                         break;
                     case "4":
                         AddHardware(client, "Mechanical Keyboard", "PC", "Cherry"); 
+                        Console.WriteLine("New hardware was added.");
+                        Console.WriteLine("\nHit 'Return' to continue.");
+                        Console.ReadLine();
                         break;
                     case "5":
                         Lease(client, 5);
+                        Console.WriteLine("\nHit 'Return' to continue.");
+                        Console.ReadLine();
                         break;
                     case "6":
+                        Console.Clear();
                         applicationIsRunning = false;
                         break;
                     default:
                         Console.WriteLine("Would you kindly select a valid option?");
+                        Console.WriteLine("\nHit 'Return' to continue.");
+                        Console.ReadLine();
                         break;
                 }
             } while(applicationIsRunning);
+        }
+
+        static void ShowMenu() {
+            Console.WriteLine("\n\nWelcome to the Hardware Store!");
+            Console.WriteLine("-----------------------------------");
+            Console.WriteLine("1. List all hardware.");
+            Console.WriteLine("2. List all hardware filtered on platform.");
+            Console.WriteLine("3. Show active leases.");
+            Console.WriteLine("4. Add new hardware.");
+            Console.WriteLine("5. Lease hardware.");
+            Console.WriteLine("-----------------------------------");
+            Console.WriteLine("6. Exit application.\n\n");
         }
 
         static void AddHardware(RestClient client, string passedName, string passedPlatform, string passedIp)
