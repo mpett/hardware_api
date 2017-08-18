@@ -75,6 +75,19 @@ def create_hardware():
     hardware_list.append(hardware)
     return jsonify({'hardware' : hardware}), 201
 
+@app.route('/todo/api/v1.0/lease/<int:hardware_id>', methods=['PUT'])
+def lease_hardware(hardware_id):
+    hardware = [hardware for hardware in hardware_list if hardware['id'] == hardware_id]
+    if len(hardware) == 0:
+        abort(404)
+    if not request.json:
+        abort(400)
+    if 'leased' in request.json and type(request.json['leased']) is not bool:
+        abort(400)
+    hardware[0]['leased'] = request.json.get('leased', hardware[0]['leased'])
+    return jsonify({'hardware': hardware[0]})
+
+
 @app.route('/todo/api/v1.0/hardware_list/<int:hardware_id>', methods=['PUT'])
 def update_hardware(hardware_id):
     hardware = [hardware for hardware in hardware_list if hardware['id'] == hardware_id]

@@ -11,7 +11,7 @@ namespace frontend
         public string ip;
         public bool leased;
     }
-
+    
     class Program
     {
         static void Main(string[] args)
@@ -86,7 +86,6 @@ namespace frontend
             Console.WriteLine("6. Exit application.\n\n");
         }
 
-        
         static void ListAllHardware(RestClient client) {
             var request = new RestRequest("todo/api/v1.0/hardware_list", Method.GET);
             IRestResponse response = client.Execute(request);
@@ -120,10 +119,9 @@ namespace frontend
             });
             client.Execute(request);
         }
-        
         static void Lease(RestClient client, int passedId)
         {
-            var request = new RestRequest("todo/api/v1.0/hardware_list/" + passedId, Method.PUT);
+            var request = new RestRequest("todo/api/v1.0/lease/" + passedId, Method.PUT);
             request.RequestFormat = DataFormat.Json;
             request.AddBody( new Hardware
             {
