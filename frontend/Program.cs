@@ -121,6 +121,7 @@ namespace frontend
             });
             client.Execute(request);
         }
+        
         static void Lease(RestClient client, int passedId)
         {
             var request = new RestRequest("todo/api/v1.0/lease/" + passedId, Method.PUT);
