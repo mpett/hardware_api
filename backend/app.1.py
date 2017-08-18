@@ -9,21 +9,24 @@ hardware_list = [
         'name': u'GTX Titan',
         'platform': u'PC', 
         'ip': u'nVIDIA', 
-        'leased': True
+        'leased': True,
+        'time_left_on_lease': 10
     },
     {
         'id': 2,
         'name': u'1 TB Hard Drive',
         'platform': u'PS4',
         'ip': u'Seagate',  
-        'leased': False
+        'leased': False,
+        'time_left_on_lease': 0
     },
     {
         'id': 3,
         'name': u'GTX 1080',
         'platform': u'PC', 
         'ip': u'nVIDIA', 
-        'leased': True
+        'leased': True,
+        'time_left_on_lease': 10
     }
 ]
 
@@ -70,7 +73,8 @@ def create_hardware():
         'name' : request.json['name'],
         'platform' : request.json.get('platform', ""),
         'ip' : request.json.get('ip', ""),
-        'leased' : False
+        'leased' : False,
+        "time_left_on_lease" : 0
     }
     hardware_list.append(hardware)
     return jsonify({'hardware' : hardware}), 201
@@ -84,7 +88,10 @@ def lease_hardware(hardware_id):
         abort(400)
     if 'leased' in request.json and type(request.json['leased']) is not bool:
         abort(400)
+    if 'time_left_on_lease' in request.json and type(request.json['time_left_on_lease']) is not int:
+        abort(400)
     hardware[0]['leased'] = request.json.get('leased', hardware[0]['leased'])
+    hardware[0]['time_left_on_lease'] = request.json.get('time_left_on_lease', hardware[0]['time_left_on_lease'])
     return jsonify({'hardware': hardware[0]})
 
 
@@ -103,10 +110,13 @@ def update_hardware(hardware_id):
         abort(400)
     if 'leased' in request.json and type(request.json['leased']) is not bool:
         abort(400)
+    if 'time_left_on_lease' in request.json and type(request.json['time_left_on_lease']) is not int:
+        abort(400)
     hardware[0]['name'] = request.json.get('name', hardware[0]['name'])
     hardware[0]['platform'] = request.json.get('platform', hardware[0]['platform'])
     hardware[0]['ip'] = request.json.get('ip', hardware[0]['ip'])
     hardware[0]['leased'] = request.json.get('leased', hardware[0]['leased'])
+    hardware[0]['time_left_on_lease'] = request.json.get('time_left_on_lease', hardware[0]['time_left_on_lease'])
     return jsonify({'hardware': hardware[0]})
 
 @app.route('/todo/api/v1.0/hardware_list/<int:hardware_id>', methods = ['DELETE'])

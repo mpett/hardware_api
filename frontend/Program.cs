@@ -60,7 +60,9 @@ namespace frontend
                     case "5":
                         Console.Write("\nWould you kindly enter the id for the hardware you would like to lease: ");
                         int leaseID = Int32.Parse(Console.ReadLine());
-                        Lease(client, leaseID);
+                        Console.Write("\nDuration of lease: ");
+                        int duration = Int32.Parse(Console.ReadLine());
+                        Lease(client, leaseID, duration);
                         Console.WriteLine("\nHit 'Return' to continue.");
                         Console.ReadLine();
                         break;
@@ -123,13 +125,14 @@ namespace frontend
             client.Execute(request);
         }
 
-        static void Lease(RestClient client, int passedId)
+        static void Lease(RestClient client, int passedId, int passedTimeLeftOnLease)
         {
             var request = new RestRequest("todo/api/v1.0/lease/" + passedId, Method.PUT);
             request.RequestFormat = DataFormat.Json;
             request.AddBody( new Hardware
             {
-                leased = true
+                leased = true,
+                time_left_on_lease = passedTimeLeftOnLease
             });
             client.Execute(request);
         }
