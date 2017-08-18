@@ -11,7 +11,7 @@ namespace frontend
         public string ip;
         public bool leased;
     }
-    
+
     class Program
     {
         static void Main(string[] args)
@@ -57,7 +57,9 @@ namespace frontend
                         Console.ReadLine();
                         break;
                     case "5":
-                        Lease(client, 5);
+                        Console.Write("\nWould you kindly enter the id for the hardware you would like to lease: ");
+                        int leaseID = Int32.Parse(Console.ReadLine());
+                        Lease(client, leaseID);
                         Console.WriteLine("\nHit 'Return' to continue.");
                         Console.ReadLine();
                         break;
