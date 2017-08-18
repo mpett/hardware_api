@@ -1,8 +1,3 @@
-def lol():
-    return "asdf"
-
-lol = "asdf"
-
 hardware_list = [ 
     {
         'id': 1,
