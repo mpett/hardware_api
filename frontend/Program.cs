@@ -1,16 +1,31 @@
 ﻿using System;
+using System.Collections.Generic;
 using RestSharp;
+using Newtonsoft.Json;
 
 namespace frontend
 {
-    class Hardware
+    public class Hardware
     {
-        public int id;
-        public string name;
-        public string platform;
-        public string ip;
-        public bool leased;
-        public int time_left_on_lease;
+        public int id {get;set;}
+        public string name {get;set;}
+        public string platform {get;set;}
+        public string ip {get;set;}
+        public bool leased {get;set;}
+        public int time_left_on_lease {get;set;}
+    }
+
+     public class Account
+{
+    public string Email { get; set; }
+    public bool Active { get; set; }
+    public DateTime CreatedDate { get; set; }
+    public IList<string> Roles { get; set; }
+}
+
+    public class HardwareList
+    {
+        public List<Hardware> hardwares {get;set;}
     }
 
     class Program
@@ -110,21 +125,22 @@ namespace frontend
             var request = new RestRequest("todo/api/v1.0/hardware_list", Method.GET);
             IRestResponse response = client.Execute(request);
             var content = response.Content;
-            Console.WriteLine(content);
+            DeserializeAndDisplayResponse(content);
         }
 
         static void ListPlatformFilteredHardware(RestClient client, string platform) {
             var request = new RestRequest("todo/api/v1.0/hardware_list/" + platform, Method.GET);
             IRestResponse response = client.Execute(request);
             var content = response.Content;
-            Console.WriteLine(content);
+            DeserializeAndDisplayResponse(content);
         }
 
         static void ListActiveLeases(RestClient client) {
+            client.AddHandler("hardware_list", new RestSharp.Deserializers.JsonDeserializer());
             var request = new RestRequest("todo/api/v1.0/active_leases", Method.GET);
             IRestResponse response = client.Execute(request);
             var content = response.Content;
-            Console.WriteLine(content);
+            DeserializeAndDisplayResponse(content);
         }
 
         static void AddHardware(RestClient client, string passedName, string passedPlatform, string passedIp)
@@ -150,6 +166,20 @@ namespace frontend
                 time_left_on_lease = passedTimeLeftOnLease
             });
             client.Execute(request);
+        }
+
+        static void DeserializeAndDisplayResponse(string content) {
+            List<Hardware> response = JsonConvert.DeserializeObject<List<Hardware>>(content);
+            foreach(Hardware hardware in response) {
+                Console.WriteLine("\n\n------------------------------------------");
+                Console.WriteLine("ID: " + hardware.id);
+                Console.WriteLine("NAME: " + hardware.name);
+                Console.WriteLine("PLATFORM: " + hardware.platform);
+                Console.WriteLine("IP: " + hardware.ip);
+                Console.WriteLine("LEASED: " + hardware.leased);
+                Console.WriteLine("TIME LEFT ON LEASE: " + hardware.time_left_on_lease);
+                Console.WriteLine("------------------------------------------");
+            }
         }
     }
 }
