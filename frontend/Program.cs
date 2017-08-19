@@ -1,9 +1,10 @@
-﻿using System;
+using System;
+using System.Runtime.InteropServices;
+using static System.Console;
+using System;
 using System.Collections.Generic;
 using RestSharp;
 using Newtonsoft.Json;
-using System.Runtime.InteropServices;
-using static System.Console;
 
 public class Hardware
 {
@@ -14,97 +15,97 @@ public class Hardware
     public bool leased {get;set;}
     public int time_left_on_lease {get;set;}
 }
-
 public static class Program
 {
-    public static void Main(string[] args)
+    public static void Main(string[] args) 
     {
         RunClient();
     }
 
-    public static void RunClient() {
+   static void RunClient() 
+   {
         var client = new RestClient("http://localhost:5000");
         bool applicationIsRunning = true;
         do { 
-            Clear();
+            Console.Clear();
             ShowMenu();
-            string input = ReadLine();
+            string input = Console.ReadLine();
             switch(input) {
                 case "1":
                     ListAllHardware(client);
-                    WriteLine("\nHit 'Return' to continue.");
-                    ReadLine();
+                    Console.WriteLine("\nHit 'Return' to continue.");
+                    Console.ReadLine();
                     break;
                 case "2":
                     try {
-                        Write("Would you kindly type the platform name: ");
-                        string platformInput = ReadLine();
+                        Console.Write("Would you kindly type the platform name: ");
+                        string platformInput = Console.ReadLine();
                         ListPlatformFilteredHardware(client, platformInput);
                     } catch (FormatException e) {
-                        WriteLine("The input you specified is not valid. Would you kindly try again?");
+                        Console.WriteLine("The input you specified is not valid. Would you kindly try again?");
                     }
-                    WriteLine("\nHit 'Return' to continue.");
-                    ReadLine();
+                    Console.WriteLine("\nHit 'Return' to continue.");
+                    Console.ReadLine();
                     break;
                 case "3":
                     ListActiveLeases(client);
-                    WriteLine("\nHit 'Return' to continue.");
-                    ReadLine();
+                    Console.WriteLine("\nHit 'Return' to continue.");
+                    Console.ReadLine();
                     break;
                 case "4":
                     try {
-                        Write("\nWould you kindly type the hardware name: ");
-                        string newNameInput = ReadLine();
-                        Write("\n\n... and platform: ");
-                        string newPlatformInput = ReadLine();
-                        Write("\n\n... and finally the IP: ");
-                        string newIpInput = ReadLine();
+                        Console.Write("\nWould you kindly type the hardware name: ");
+                        string newNameInput = Console.ReadLine();
+                        Console.Write("\n\n... and platform: ");
+                        string newPlatformInput = Console.ReadLine();
+                        Console.Write("\n\n... and finally the IP: ");
+                        string newIpInput = Console.ReadLine();
                         AddHardware(client, newNameInput, newPlatformInput, newIpInput); 
                     } catch (FormatException e) {
-                        WriteLine("The input you specified is not valid. Would you kindly try again?");
+                        Console.WriteLine("The input you specified is not valid. Would you kindly try again?");
                     }
-                    WriteLine("\nNew hardware was added.");
-                    WriteLine("\nHit 'Return' to continue.");
-                    ReadLine();
+                    Console.WriteLine("\nNew hardware was added.");
+                    Console.WriteLine("\nHit 'Return' to continue.");
+                    Console.ReadLine();
                     break;
                 case "5":
                     try {
-                        Write("\nWould you kindly enter the id for the hardware you would like to lease: ");
-                        int leaseID = Int32.Parse(ReadLine());
-                        Write("\nDuration of lease: ");
-                        int duration = Int32.Parse(ReadLine());
+                        Console.Write("\nWould you kindly enter the id for the hardware you would like to lease: ");
+                        int leaseID = Int32.Parse(Console.ReadLine());
+                        Console.Write("\nDuration of lease: ");
+                        int duration = Int32.Parse(Console.ReadLine());
                         Lease(client, leaseID, duration);
                     } catch (FormatException e) {
-                        WriteLine("The input you specified is not valid. Would you kindly try again?");
+                        Console.WriteLine("The input you specified is not valid. Would you kindly try again?");
                     } catch (System.OverflowException e) {
-                        WriteLine("Something went horribly wrong. Would you kindly try again?");
+                        Console.WriteLine("Something went horribly wrong. Would you kindly try again?");
                     }
-                    WriteLine("\nHit 'Return' to continue.");
-                    ReadLine();
+                    Console.WriteLine("\nHit 'Return' to continue.");
+                    Console.ReadLine();
                     break;
                 case "6":
-                    Clear();
+                    Console.Clear();
                     applicationIsRunning = false;
                     break;
                 default:
-                    WriteLine("Would you kindly select a valid option?");
-                    WriteLine("\nHit 'Return' key to continue.");
-                    ReadLine();
+                    Console.WriteLine("Would you kindly select a valid option?");
+                    Console.WriteLine("\nHit 'Return' key to continue.");
+                    Console.ReadLine();
                     break;
             }
         } while(applicationIsRunning);
     }
 
     static void ShowMenu() {
-        WriteLine("\n\nWelcome to the Hardware Store!");
-        WriteLine("-----------------------------------");
-        WriteLine("1. List all hardware.");
-        WriteLine("2. List all hardware filtered on platform.");
-        WriteLine("3. Show active leases.");
-        WriteLine("4. Add new hardware.");
-        WriteLine("5. Lease hardware.");
-        WriteLine("-----------------------------------");
-        WriteLine("6. Exit application.\n\n");
+        Console.WriteLine("\n\nWelcome to the Hardware Store!");
+        Console.WriteLine("-----------------------------------");
+        Console.WriteLine("1. List all hardware.");
+        Console.WriteLine("2. List all hardware filtered on platform.");
+        Console.WriteLine("3. Show active leases.");
+        Console.WriteLine("4. Add new hardware.");
+        Console.WriteLine("5. Lease hardware.");
+        Console.WriteLine("-----------------------------------");
+        Console.WriteLine("6. Exit application.\n\n");
     }
 
     static void ListAllHardware(RestClient client) {
@@ -159,18 +160,18 @@ public static class Program
             List<Hardware> response = JsonConvert.DeserializeObject<List<Hardware>>(content);
             foreach(Hardware hardware in response) 
             {
-                WriteLine("\n\n------------------------------------------");
-                WriteLine("ID: " + hardware.id);
-                WriteLine("NAME: " + hardware.name);
-                WriteLine("PLATFORM: " + hardware.platform);
-                WriteLine("IP: " + hardware.ip);
-                WriteLine("LEASED: " + hardware.leased);
-                WriteLine("TIME LEFT ON LEASE: " + hardware.time_left_on_lease);
-                WriteLine("------------------------------------------");
+                Console.WriteLine("\n\n------------------------------------------");
+                Console.WriteLine("ID: " + hardware.id);
+                Console.WriteLine("NAME: " + hardware.name);
+                Console.WriteLine("PLATFORM: " + hardware.platform);
+                Console.WriteLine("IP: " + hardware.ip);
+                Console.WriteLine("LEASED: " + hardware.leased);
+                Console.WriteLine("TIME LEFT ON LEASE: " + hardware.time_left_on_lease);
+                Console.WriteLine("------------------------------------------");
             }
         } catch (Newtonsoft.Json.JsonSerializationException e) 
         {
-            WriteLine("\nEither there are no results or something went wrong.");
+            Console.WriteLine("\nEither there are no results or something went wrong.");
         }
     }
 }

@@ -1,0 +1,10 @@
+/Users/martin.pettersson/dotnet_docker_sample/repository/dotnetapp-dev/bin/release/netcoreapp2.0/dotnetapp.deps.json
+/Users/martin.pettersson/dotnet_docker_sample/repository/dotnetapp-dev/bin/release/netcoreapp2.0/dotnetapp.runtimeconfig.json
+/Users/martin.pettersson/dotnet_docker_sample/repository/dotnetapp-dev/bin/release/netcoreapp2.0/dotnetapp.runtimeconfig.dev.json
+/Users/martin.pettersson/dotnet_docker_sample/repository/dotnetapp-dev/bin/release/netcoreapp2.0/dotnetapp.dll
+/Users/martin.pettersson/dotnet_docker_sample/repository/dotnetapp-dev/bin/release/netcoreapp2.0/dotnetapp.pdb
+/Users/martin.pettersson/dotnet_docker_sample/repository/dotnetapp-dev/obj/release/netcoreapp2.0/dotnetapp.csproj.CoreCompileInputs.cache
+/Users/martin.pettersson/dotnet_docker_sample/repository/dotnetapp-dev/obj/release/netcoreapp2.0/dotnetapp.AssemblyInfoInputs.cache
+/Users/martin.pettersson/dotnet_docker_sample/repository/dotnetapp-dev/obj/release/netcoreapp2.0/dotnetapp.AssemblyInfo.cs
+/Users/martin.pettersson/dotnet_docker_sample/repository/dotnetapp-dev/obj/release/netcoreapp2.0/dotnetapp.dll
+/Users/martin.pettersson/dotnet_docker_sample/repository/dotnetapp-dev/obj/release/netcoreapp2.0/dotnetapp.pdb

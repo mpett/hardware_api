@@ -1,0 +1,7 @@
+dotnetapp-dev:
+  build: .
+  ports:
+    - "5000:5000"
+  extra_hosts:
+    - "dockerhost:$DOCKERHOST"
+  stdin_open: true

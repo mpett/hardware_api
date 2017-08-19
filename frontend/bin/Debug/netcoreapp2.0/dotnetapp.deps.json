@@ -6,13 +6,13 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v2.0": {
-      "frontend/1.0.0": {
+      "dotnetapp/1.0.0": {
         "dependencies": {
           "Newtonsoft.Json": "10.0.3",
           "RestSharp": "105.2.3"
         },
         "runtime": {
-          "frontend.dll": {}
+          "dotnetapp.dll": {}
         }
       },
       "Microsoft.CSharp/4.3.0": {
@@ -396,7 +396,7 @@
     }
   },
   "libraries": {
-    "frontend/1.0.0": {
+    "dotnetapp/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

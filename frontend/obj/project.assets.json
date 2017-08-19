@@ -3617,9 +3617,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/martin.pettersson/random_repos/todo_api/frontend/frontend.csproj",
-      "projectName": "frontend",
-      "projectPath": "/Users/martin.pettersson/random_repos/todo_api/frontend/frontend.csproj",
+      "projectUniqueName": "/Users/martin.pettersson/random_repos/todo_api/frontend/dotnetapp.csproj",
+      "projectName": "dotnetapp",
+      "projectPath": "/Users/martin.pettersson/random_repos/todo_api/frontend/dotnetapp.csproj",
       "packagesPath": "/Users/martin.pettersson/.nuget/packages/",
       "outputPath": "/Users/martin.pettersson/random_repos/todo_api/frontend/obj/",
       "projectStyle": "PackageReference",
