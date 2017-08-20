@@ -56,8 +56,6 @@ def create_hardware():
 @app.route('/hardware/api/1.0/lease/<int:hardware_id>', methods=['PUT'])
 def lease_hardware(hardware_id):
     hardware = [hardware for hardware in hardware_list if hardware['id'] == hardware_id]
-    if hardware[0]['leased']:
-        return "The hardware is already leased."
     if len(hardware) == 0:
         abort(404)
     if not request.json:
@@ -66,9 +64,11 @@ def lease_hardware(hardware_id):
         abort(400)
     if 'time_left_on_lease' in request.json and type(request.json['time_left_on_lease']) is not int:
         abort(400)
+    if hardware[0]['leased']:
+        return "The hardware is already leased."
     hardware[0]['leased'] = request.json.get('leased', hardware[0]['leased'])
     hardware[0]['time_left_on_lease'] = request.json.get('time_left_on_lease', hardware[0]['time_left_on_lease'])
-    return "The hardware was leased successfully."
+    return "Successfully leased hardware."
 
 @app.route('/hardware/api/1.0/hardware_list/<int:hardware_id>', methods=['PUT'])
 def update_hardware(hardware_id):
@@ -104,7 +104,7 @@ def delete_hardware(hardware_id):
 
 @app.errorhandler(404)
 def not_found(error):
-    return make_response(jsonify({'error' : 'Not Found'}), 404)
+    return make_response("Not found.", 404)
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=2204)
