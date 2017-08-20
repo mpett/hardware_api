@@ -192,7 +192,9 @@ public static class Program
             leased = true,
             time_left_on_lease = passedTimeLeftOnLease
         });
-        client.Execute(request);
+        IRestResponse response = client.Execute(request);
+        var content = response.Content;
+        WriteLine("\n" + content);
     }
 
     static void DeserializeAndDisplayResponse(string content) 

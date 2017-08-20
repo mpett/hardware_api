@@ -56,6 +56,8 @@ def create_hardware():
 @app.route('/hardware/api/1.0/lease/<int:hardware_id>', methods=['PUT'])
 def lease_hardware(hardware_id):
     hardware = [hardware for hardware in hardware_list if hardware['id'] == hardware_id]
+    if hardware[0]['leased']:
+        return "The hardware is already leased."
     if len(hardware) == 0:
         abort(404)
     if not request.json:
@@ -66,8 +68,7 @@ def lease_hardware(hardware_id):
         abort(400)
     hardware[0]['leased'] = request.json.get('leased', hardware[0]['leased'])
     hardware[0]['time_left_on_lease'] = request.json.get('time_left_on_lease', hardware[0]['time_left_on_lease'])
-    return jsonify(hardware[0])
-
+    return "The hardware was leased successfully."
 
 @app.route('/hardware/api/1.0/hardware_list/<int:hardware_id>', methods=['PUT'])
 def update_hardware(hardware_id):
