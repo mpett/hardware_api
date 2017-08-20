@@ -15,7 +15,7 @@ def make_public_hardware(hardware):
 
 @app.route('/hardware/api/1.0/hardware_list', methods=['GET'])
 def get_hardware_list():
-    return jsonify([make_public_hardware(hardware) for hardware in hardware_list])
+    return jsonify([hardware for hardware in hardware_list])
 
 @app.route('/hardware/api/1.0/hardware_list/<int:hardware_id>', methods=['GET'])
 def get_hardware(hardware_id):
@@ -101,6 +101,10 @@ def delete_hardware(hardware_id):
         abort(404)
     hardware_list.remove(hardware[0])
     return jsonify({'result' : True})
+
+@app.errorhandler(400)
+def not_found_400(error):
+    return make_response("Not found.", 404)
 
 @app.errorhandler(404)
 def not_found(error):

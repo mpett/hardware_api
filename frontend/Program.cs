@@ -158,7 +158,10 @@ public static class Program
         var request = new RestRequest("hardware/api/1.0/hardware_list/" + platform, Method.GET);
         IRestResponse response = client.Execute(request);
         var content = response.Content;
-        DeserializeAndDisplayResponse(content);
+        if (content.Equals("Not found."))
+            WriteLine(content);
+        else 
+            DeserializeAndDisplayResponse(content);
     }
 
     static void ListActiveLeases(RestClient client) 
