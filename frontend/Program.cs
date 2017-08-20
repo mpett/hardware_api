@@ -23,7 +23,7 @@ public static class Program
 
    static void RunClient() 
    {
-        var client = new RestClient("http://localhost:5000");
+        var client = new RestClient("http://localhost:2204/");
         bool applicationIsRunning = true;
         do 
         { 
@@ -117,7 +117,7 @@ public static class Program
 
     static void ListAllHardware(RestClient client) 
     {
-        var request = new RestRequest("todo/api/v1.0/hardware_list", Method.GET);
+        var request = new RestRequest("hardware/api/1.0/hardware_list", Method.GET);
         IRestResponse response = client.Execute(request);
         var content = response.Content;
         DeserializeAndDisplayResponse(content);
@@ -125,7 +125,7 @@ public static class Program
 
     static void ListPlatformFilteredHardware(RestClient client, string platform) 
     {
-        var request = new RestRequest("todo/api/v1.0/hardware_list/" + platform, Method.GET);
+        var request = new RestRequest("hardware/api/1.0/hardware_list/" + platform, Method.GET);
         IRestResponse response = client.Execute(request);
         var content = response.Content;
         DeserializeAndDisplayResponse(content);
@@ -134,7 +134,7 @@ public static class Program
     static void ListActiveLeases(RestClient client) 
     {
         client.AddHandler("hardware_list", new RestSharp.Deserializers.JsonDeserializer());
-        var request = new RestRequest("todo/api/v1.0/active_leases", Method.GET);
+        var request = new RestRequest("hardware/api/1.0/active_leases", Method.GET);
         IRestResponse response = client.Execute(request);
         var content = response.Content;
         DeserializeAndDisplayResponse(content);
@@ -142,7 +142,7 @@ public static class Program
 
     static void AddHardware(RestClient client, string passedName, string passedPlatform, string passedIp)
     {
-        var request = new RestRequest("todo/api/v1.0/hardware_list", Method.POST);
+        var request = new RestRequest("hardware/api/1.0/hardware_list", Method.POST);
         request.RequestFormat = DataFormat.Json;
         request.AddBody( new Hardware
         {
@@ -155,7 +155,7 @@ public static class Program
 
     static void Lease(RestClient client, int passedId, int passedTimeLeftOnLease)
     {
-        var request = new RestRequest("todo/api/v1.0/lease/" + passedId, Method.PUT);
+        var request = new RestRequest("hardware/api/1.0/lease/" + passedId, Method.PUT);
         request.RequestFormat = DataFormat.Json;
         request.AddBody( new Hardware
         {

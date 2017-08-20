@@ -13,32 +13,32 @@ def make_public_hardware(hardware):
             new_hardware[field] = hardware[field]
     return new_hardware
 
-@app.route('/todo/api/v1.0/hardware_list', methods=['GET'])
+@app.route('/hardware/api/1.0/hardware_list', methods=['GET'])
 def get_hardware_list():
     return jsonify([make_public_hardware(hardware) for hardware in hardware_list])
 
-@app.route('/todo/api/v1.0/hardware_list/<int:hardware_id>', methods=['GET'])
+@app.route('/hardware/api/1.0/hardware_list/<int:hardware_id>', methods=['GET'])
 def get_hardware(hardware_id):
     hardware = [hardware for hardware in hardware_list if hardware['id'] == hardware_id]
     if len(hardware) == 0:
         abort(404)
     return jsonify(hardware[0])
 
-@app.route('/todo/api/v1.0/hardware_list/<string:hardware_platform>', methods=['GET'])
+@app.route('/hardware/api/1.0/hardware_list/<string:hardware_platform>', methods=['GET'])
 def get_hardware_by_platform(hardware_platform):
     hardware = [hardware for hardware in hardware_list if hardware['platform'] == hardware_platform]
     if len(hardware) == 0:
         abort(404)
     return jsonify(hardware)
 
-@app.route('/todo/api/v1.0/active_leases', methods=['GET'])
+@app.route('/hardware/api/1.0/active_leases', methods=['GET'])
 def get_active_leases():
     hardware = [hardware for hardware in hardware_list if hardware['leased']]
     if len(hardware) == 0:
         abort(404)
     return jsonify(hardware)
 
-@app.route('/todo/api/v1.0/hardware_list', methods=['POST'])
+@app.route('/hardware/api/1.0/hardware_list', methods=['POST'])
 def create_hardware():
     if not request.json or not 'name' in request.json:
         abort(400)
@@ -53,7 +53,7 @@ def create_hardware():
     hardware_list.append(hardware)
     return jsonify(hardware), 201
 
-@app.route('/todo/api/v1.0/lease/<int:hardware_id>', methods=['PUT'])
+@app.route('/hardware/api/1.0/lease/<int:hardware_id>', methods=['PUT'])
 def lease_hardware(hardware_id):
     hardware = [hardware for hardware in hardware_list if hardware['id'] == hardware_id]
     if len(hardware) == 0:
@@ -69,7 +69,7 @@ def lease_hardware(hardware_id):
     return jsonify(hardware[0])
 
 
-@app.route('/todo/api/v1.0/hardware_list/<int:hardware_id>', methods=['PUT'])
+@app.route('/hardware/api/1.0/hardware_list/<int:hardware_id>', methods=['PUT'])
 def update_hardware(hardware_id):
     hardware = [hardware for hardware in hardware_list if hardware['id'] == hardware_id]
     if len(hardware) == 0:
@@ -93,7 +93,7 @@ def update_hardware(hardware_id):
     hardware[0]['time_left_on_lease'] = request.json.get('time_left_on_lease', hardware[0]['time_left_on_lease'])
     return jsonify(hardware[0])
 
-@app.route('/todo/api/v1.0/hardware_list/<int:hardware_id>', methods = ['DELETE'])
+@app.route('/hardware/api/1.0/hardware_list/<int:hardware_id>', methods = ['DELETE'])
 def delete_hardware(hardware_id):
     hardware = [hardware for hardware in hardware_list if hardware['id'] == hardware_id]
     if len(hardware) == 0:
@@ -106,4 +106,4 @@ def not_found(error):
     return make_response(jsonify({'error' : 'Not Found'}), 404)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=2204)
