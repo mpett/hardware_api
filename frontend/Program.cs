@@ -38,15 +38,27 @@ public static class Program
                     ReadLine();
                     break;
                 case "2":
-                    try 
+                    WriteLine("\nWould you kindly choose a platform: ");
+                    WriteLine("1. PC");
+                    WriteLine("2. PS4");
+                    WriteLine("3. XBOX");
+                    String platformAlternative = ReadLine();
+                    String platformInput = "PC";
+                    switch (platformAlternative)
                     {
-                        Write("Would you kindly type the platform name: ");
-                        string platformInput = ReadLine();
-                        ListPlatformFilteredHardware(client, platformInput);
-                    } catch (FormatException e) 
-                    {
-                        WriteLine("The input you specified is not valid. Would you kindly try again?");
+                        case "1":
+                            break;
+                        case "2":
+                            platformInput = "PS4";
+                            break;
+                        case "3":
+                            platformInput = "XBOX";
+                            break;
+                        default:
+                            WriteLine("You have not chosen an alternative from the list. Choosing default platform: PC");
+                            break;
                     }
+                    ListPlatformFilteredHardware(client, platformInput);
                     WriteLine("\nHit 'Return' to continue.");
                     ReadLine();
                     break;
@@ -56,11 +68,29 @@ public static class Program
                     ReadLine();
                     break;
                 case "4":
+                    WriteLine("\nWould you kindly choose a platform: ");
+                    WriteLine("1. PC");
+                    WriteLine("2. PS4");
+                    WriteLine("3. XBOX");
+                    platformAlternative = ReadLine();
+                    String newPlatformInput = "PC";
+                    switch (platformAlternative)
+                    {
+                        case "1":
+                            break;
+                        case "2":
+                            newPlatformInput = "PS4";
+                            break;
+                        case "3":
+                            newPlatformInput = "XBOX";
+                            break;
+                        default:
+                            WriteLine("You have not chosen an alternative from the list. Choosing default platform: PC");
+                            break;
+                    }
                     try {
                         Write("\nWould you kindly type the hardware name: ");
                         string newNameInput = ReadLine();
-                        Write("\n\n... and platform: ");
-                        string newPlatformInput = ReadLine();
                         Write("\n\n... and finally the IP: ");
                         string newIpInput = ReadLine();
                         AddHardware(client, newNameInput, newPlatformInput, newIpInput); 
