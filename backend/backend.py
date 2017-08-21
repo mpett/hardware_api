@@ -87,29 +87,6 @@ def lease_hardware():
     global lease_thread
     lease_thread = threading.Timer(0, timer(time, hardware), ()).start()
     return "Successfully leased hardware."
-
-@app.route('/hardware/api/1.0/hardware_list/<int:hardware_id>', methods=['PUT'])
-def update_hardware(hardware_id):
-    hardware = [hardware for hardware in hardware_list if hardware['id'] == hardware_id]
-    if len(hardware) == 0:
-        abort(404)
-    if not request.json:
-        abort(400)
-    if 'name' in request.json and type(request.json['name']) is not str:
-        abort(400)
-    if 'platform' in request.json and type(request.json['platform']) is not str:
-        abort(400)
-    if 'ip' in request.json and type(request.json['ip']) is not str:
-        abort(400)
-    if 'leased' in request.json and type(request.json['leased']) is not bool:
-        abort(400)
-    if 'time_left_on_lease' in request.json and type(request.json['time_left_on_lease']) is not int:
-        abort(400)
-    hardware[0]['name'] = request.json.get('name', hardware[0]['name'])
-    hardware[0]['platform'] = request.json.get('platform', hardware[0]['platform'])
-    hardware[0]['ip'] = request.json.get('ip', hardware[0]['ip'])
-    hardware[0]['leased'] = request.json.get('leased', hardware[0]['leased'])
-    hardware[0]['time_left_on_lease'] = request.json.get('time_left_on_lease', hardware[0]['time_left_on_lease'])
     return jsonify(hardware[0])
 
 @app.route('/hardware/api/1.0/hardware_list/<int:hardware_id>', methods = ['DELETE'])
