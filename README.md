@@ -2,7 +2,7 @@
 
 A simple server-client for listing and leasing hardware for PC, PS4 and XBOX
 
-## Getting the solution
+## Getting the service
 
 The easiest way is to clone this repository.
 
@@ -39,13 +39,12 @@ docker inspect <backend_container_id>
 
 ## Build and run locally
 
-You can also build and run the sample locally. The instructions assume that you are in the root of the repository.
+You can also build and run the service locally. The instructions assume that you are in the root of the repository.
 
 ```console
 cd backend
 python backend.py
-cd ..
-cd frontend
+cd ../frontend
 dotnet restore
 dotnet run
 ```
