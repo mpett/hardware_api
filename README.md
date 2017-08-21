@@ -1,6 +1,6 @@
 # Hardware API
 
-A simple server-client for listing and leasing hardware for PC, PS4 and XBOX
+A simple server-client service for listing and leasing hardware for PC, PS4 and XBOX
 
 ## Getting the service
 
