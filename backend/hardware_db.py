@@ -4,8 +4,8 @@ hardware_list = [
         'name': u'GTX Titan',
         'platform': u'PC', 
         'ip': u'nVIDIA', 
-        'leased': True,
-        'time_left_on_lease': 10
+        'leased': False,
+        'time_left_on_lease': 0
     },
     {
         'id': 2,
@@ -20,7 +20,7 @@ hardware_list = [
         'name': u'GTX 1080',
         'platform': u'PC', 
         'ip': u'nVIDIA', 
-        'leased': True,
-        'time_left_on_lease': 10
+        'leased': False,
+        'time_left_on_lease': 0
     }
 ]

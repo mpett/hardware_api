@@ -32,7 +32,6 @@ public static class Program
         {
             WriteLine("Something went wrong. Make sure that there is connection with the server.");
         }
-        
     }
 
    private static void RunClient(string ip) 
