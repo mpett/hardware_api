@@ -121,7 +121,7 @@ public static class Program
                     {
                         Write("\nWould you kindly enter the id for the hardware you would like to lease: ");
                         int leaseID = Int32.Parse(ReadLine());
-                        Write("\nDuration of lease: ");
+                        Write("\nDuration of lease in minutes: ");
                         int duration = Int32.Parse(ReadLine());
                         Lease(client, leaseID, duration);
                     } catch (FormatException e) 
