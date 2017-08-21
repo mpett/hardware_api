@@ -14,7 +14,8 @@ public class Hardware
     public bool leased {get;set;}
     public int time_left_on_lease {get;set;}
 }
-public static class Program
+
+public static class Frontend
 {
     public static void Main(string[] args) 
     {
