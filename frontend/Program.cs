@@ -195,9 +195,9 @@ public static class Program
             leased = true,
             time_left_on_lease = passedTimeLeftOnLease
         });
-        IRestResponse response = client.Execute(request);
-        var content = response.Content;
-        WriteLine("\n" + content);
+        client.ExecuteAsync(request, response => {
+            Console.WriteLine(response.Content);
+        });
     }
 
     static void DeserializeAndDisplayResponse(string content) 

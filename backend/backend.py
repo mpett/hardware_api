@@ -1,6 +1,15 @@
 #!flask/bin/python
 from flask import Flask, jsonify, abort, make_response, request, url_for
 from hardware_db import hardware_list
+from threading import Thread
+from time import sleep
+import sys
+import threading
+
+# lock to control access to variable
+dataLock = threading.Lock()
+# thread handler
+yourThread = threading.Thread()
 
 app = Flask(__name__)
 
@@ -67,7 +76,9 @@ def lease_hardware(hardware_id):
     if hardware[0]['leased']:
         return "The hardware is already leased."
     hardware[0]['leased'] = request.json.get('leased', hardware[0]['leased'])
-    hardware[0]['time_left_on_lease'] = request.json.get('time_left_on_lease', hardware[0]['time_left_on_lease'])
+    time = request.json.get('time_left_on_lease', hardware[0]['time_left_on_lease'])
+    global yourThread
+    yourThread = threading.Timer(0, timer(time, hardware), ()).start()
     return "Successfully leased hardware."
 
 @app.route('/hardware/api/1.0/hardware_list/<int:hardware_id>', methods=['PUT'])
@@ -110,5 +121,12 @@ def not_found_400(error):
 def not_found(error):
     return make_response("Not found.", 404)
 
+def timer(time, hardware):
+    for i in range(time):
+        hardware[0]['time_left_on_lease'] = i
+        sleep(1)
+    hardware[0]['time_left_on_lease'] = 0
+    hardware[0]['leased'] = False
+
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=2204)
+    app.run(host="0.0.0.0", port=2204, threaded=True)
