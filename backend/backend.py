@@ -123,9 +123,8 @@ def not_found(error):
 
 def timer(time, hardware):
     for i in range(time):
-        hardware[0]['time_left_on_lease'] = i
-        sleep(1)
-    hardware[0]['time_left_on_lease'] = 0
+        hardware[0]['time_left_on_lease'] = time-i
+        sleep(60)
     hardware[0]['leased'] = False
 
 if __name__ == '__main__':
