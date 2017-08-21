@@ -21,7 +21,7 @@ public static class Program
         RunClient();
     }
 
-   static void RunClient() 
+   private static void RunClient() 
    {
         var client = new RestClient("http://localhost:2204/");
         bool applicationIsRunning = true;
@@ -132,7 +132,7 @@ public static class Program
         } while(applicationIsRunning);
     }
 
-    static void ShowMenu() 
+    private static void ShowMenu() 
     {
         WriteLine("\n\nWelcome to the Hardware Store!");
         WriteLine("-----------------------------------");
@@ -145,7 +145,7 @@ public static class Program
         WriteLine("6. Exit application.\n\n");
     }
 
-    static void ListAllHardware(RestClient client) 
+    private static void ListAllHardware(RestClient client) 
     {
         var request = new RestRequest("hardware/api/1.0/hardware_list", Method.GET);
         IRestResponse response = client.Execute(request);
@@ -153,7 +153,7 @@ public static class Program
         DeserializeAndDisplayResponse(content);
     }
 
-    static void ListPlatformFilteredHardware(RestClient client, string platform) 
+    private static void ListPlatformFilteredHardware(RestClient client, string platform) 
     {
         var request = new RestRequest("hardware/api/1.0/hardware_list/" + platform, Method.GET);
         IRestResponse response = client.Execute(request);
@@ -164,7 +164,7 @@ public static class Program
             DeserializeAndDisplayResponse(content);
     }
 
-    static void ListActiveLeases(RestClient client) 
+    private static void ListActiveLeases(RestClient client) 
     {
         client.AddHandler("hardware_list", new RestSharp.Deserializers.JsonDeserializer());
         var request = new RestRequest("hardware/api/1.0/active_leases", Method.GET);
@@ -173,7 +173,7 @@ public static class Program
         DeserializeAndDisplayResponse(content);
     }
 
-    static void AddHardware(RestClient client, string passedName, string passedPlatform, string passedIp)
+    private static void AddHardware(RestClient client, string passedName, string passedPlatform, string passedIp)
     {
         var request = new RestRequest("hardware/api/1.0/hardware_list", Method.POST);
         request.RequestFormat = DataFormat.Json;
@@ -186,7 +186,7 @@ public static class Program
         client.Execute(request);
     }
 
-    static void Lease(RestClient client, int passedId, int passedTimeLeftOnLease)
+    private static void Lease(RestClient client, int passedId, int passedTimeLeftOnLease)
     {
         var request = new RestRequest("hardware/api/1.0/lease/" + passedId, Method.PUT);
         request.RequestFormat = DataFormat.Json;
@@ -200,7 +200,7 @@ public static class Program
         });
     }
 
-    static void DeserializeAndDisplayResponse(string content) 
+    private static void DeserializeAndDisplayResponse(string content) 
     {
         try {
             List<Hardware> response = JsonConvert.DeserializeObject<List<Hardware>>(content);
