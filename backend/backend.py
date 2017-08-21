@@ -5,8 +5,8 @@ from flask import Flask, jsonify, abort, make_response, request, url_for
 from hardware_db import hardware_list
 from threading import Thread
 from time import sleep
-dataLock = threading.Lock()
-yourThread = threading.Thread()
+data_lock = threading.Lock()
+lease_thread = threading.Thread()
 
 app = Flask(__name__)
 
@@ -59,23 +59,32 @@ def create_hardware():
     hardware_list.append(hardware)
     return jsonify(hardware), 201
 
-@app.route('/hardware/api/1.0/lease/<int:hardware_id>', methods=['PUT'])
-def lease_hardware(hardware_id):
-    hardware = [hardware for hardware in hardware_list if hardware['id'] == hardware_id]
+@app.route('/hardware/api/1.0/lease/', methods=['PUT'])
+def lease_hardware():
+    hardware = [hardware for hardware in hardware_list]
     if len(hardware) == 0:
         abort(404)
     if not request.json:
+        abort(400)
+    if 'name' in request.json and type(request.json['name']) is not str:
+        abort(400)
+    if 'platform' in request.json and type(request.json['platform']) is not str:
         abort(400)
     if 'leased' in request.json and type(request.json['leased']) is not bool:
         abort(400)
     if 'time_left_on_lease' in request.json and type(request.json['time_left_on_lease']) is not int:
         abort(400)
+    name = request.json.get('name', hardware[0]['name'])
+    platform = request.json.get('platform', hardware[0]['platform'])
+    hardware = [hardware for hardware in hardware_list if hardware['name'].lower() == name.lower() and hardware['platform'].lower() == platform.lower()]
+    if len(hardware) == 0:
+        abort(404)
     if hardware[0]['leased']:
         return "The hardware is already leased."
     hardware[0]['leased'] = request.json.get('leased', hardware[0]['leased'])
     time = request.json.get('time_left_on_lease', hardware[0]['time_left_on_lease'])
-    global yourThread
-    yourThread = threading.Timer(0, timer(time, hardware), ()).start()
+    global lease_thread
+    lease_thread = threading.Timer(0, timer(time, hardware), ()).start()
     return "Successfully leased hardware."
 
 @app.route('/hardware/api/1.0/hardware_list/<int:hardware_id>', methods=['PUT'])
@@ -85,11 +94,11 @@ def update_hardware(hardware_id):
         abort(404)
     if not request.json:
         abort(400)
-    if 'name' in request.json and type(request.json['name']) != unicode:
+    if 'name' in request.json and type(request.json['name']) is not str:
         abort(400)
-    if 'platform' in request.json and type(request.json['platform']) is not unicode:
+    if 'platform' in request.json and type(request.json['platform']) is not str:
         abort(400)
-    if 'ip' in request.json and type(request.json['ip']) is not unicode:
+    if 'ip' in request.json and type(request.json['ip']) is not str:
         abort(400)
     if 'leased' in request.json and type(request.json['leased']) is not bool:
         abort(400)

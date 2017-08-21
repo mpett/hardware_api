@@ -120,11 +120,13 @@ public static class Frontend
                 case "5":
                     try 
                     {
-                        Write("\nWould you kindly enter the id for the hardware you would like to lease: ");
-                        int leaseID = Int32.Parse(ReadLine());
+                        Write("\nWould you kindly enter the name for the hardware you would like to lease: ");
+                        string inputName = ReadLine();
+                        Write("\nWould you kindly enter the platform for the hardware you would like to lease: ");
+                        string inputPlatform = ReadLine();
                         Write("\nDuration of lease in minutes: ");
                         int duration = Int32.Parse(ReadLine());
-                        Lease(client, leaseID, duration);
+                        Lease(client, duration, inputName, inputPlatform);
                     } catch (FormatException e) 
                     {
                         WriteLine("The input you specified is not valid. Would you kindly try again?");
@@ -205,12 +207,14 @@ public static class Frontend
         client.Execute(request);
     }
 
-    private static void Lease(RestClient client, int passedId, int passedTimeLeftOnLease)
+    private static void Lease(RestClient client, int passedTimeLeftOnLease, string passedName, string passedPlatform)
     {
-        var request = new RestRequest("hardware/api/1.0/lease/" + passedId, Method.PUT);
+        var request = new RestRequest("hardware/api/1.0/lease/", Method.PUT);
         request.RequestFormat = DataFormat.Json;
         request.AddBody( new Hardware
         {
+            name = passedName,
+            platform = passedPlatform,
             leased = true,
             time_left_on_lease = passedTimeLeftOnLease
         });
