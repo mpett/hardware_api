@@ -76,7 +76,8 @@ def lease_hardware():
         abort(400)
     name = request.json.get('name', hardware[0]['name'])
     platform = request.json.get('platform', hardware[0]['platform'])
-    hardware = [hardware for hardware in hardware_list if hardware['name'].lower() == name.lower() and hardware['platform'].lower() == platform.lower()]
+    hardware = list(filter(lambda h : h['name'].lower() == name.lower() and h['platform'].lower() == platform.lower(), hardware))
+    hardware = list(filter(lambda h : not h['leased'], hardware))
     if len(hardware) == 0:
         abort(404)
     if hardware[0]['leased']:
