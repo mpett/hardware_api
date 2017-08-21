@@ -40,6 +40,7 @@ def get_hardware_by_platform(hardware_platform):
 @app.route('/hardware/api/1.0/active_leases', methods=['GET'])
 def get_active_leases():
     hardware = [hardware for hardware in hardware_list if hardware['leased']]
+    print len(hardware)
     if len(hardware) == 0:
         abort(404)
     return jsonify(hardware)
