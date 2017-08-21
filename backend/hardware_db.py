@@ -22,5 +22,29 @@ hardware_list = [
         'ip': u'nVIDIA', 
         'leased': False,
         'time_left_on_lease': 0
+    },
+    {
+        'id': 1,
+        'name': u'GTX Titan',
+        'platform': u'PC', 
+        'ip': u'nVIDIA', 
+        'leased': False,
+        'time_left_on_lease': 0
+    },
+    {
+        'id': 1,
+        'name': u'GTX Titan',
+        'platform': u'PC', 
+        'ip': u'nVIDIA', 
+        'leased': False,
+        'time_left_on_lease': 0
+    },
+    {
+        'id': 1,
+        'name': u'GTX Titan',
+        'platform': u'PS4', 
+        'ip': u'nVIDIA', 
+        'leased': False,
+        'time_left_on_lease': 0
     }
 ]

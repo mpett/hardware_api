@@ -77,12 +77,12 @@ def lease_hardware():
     name = request.json.get('name', hardware[0]['name'])
     platform = request.json.get('platform', hardware[0]['platform'])
     hardware = list(filter(lambda h : h['name'].lower() == name.lower() and h['platform'].lower() == platform.lower(), hardware))
-    hardware = list(filter(lambda h : not h['leased'], hardware))
     if len(hardware) == 0:
         abort(404)
-    if hardware[0]['leased']:
-        return "The hardware is already leased."
-    hardware[0]['leased'] = request.json.get('leased', hardware[0]['leased'])
+    hardware = list(filter(lambda h : not h['leased'], hardware))
+    if len(hardware) == 0:
+        return "All items are unavailable."
+    hardware[0]['leased'] = True
     time = request.json.get('time_left_on_lease', hardware[0]['time_left_on_lease'])
     global lease_thread
     lease_thread = threading.Timer(0, timer(time, hardware), ()).start()

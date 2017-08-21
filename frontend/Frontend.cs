@@ -215,7 +215,6 @@ public static class Frontend
         {
             name = passedName,
             platform = passedPlatform,
-            leased = true,
             time_left_on_lease = passedTimeLeftOnLease
         });
         client.ExecuteAsync(request, response => {
