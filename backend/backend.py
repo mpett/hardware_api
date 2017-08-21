@@ -5,10 +5,7 @@ from flask import Flask, jsonify, abort, make_response, request, url_for
 from hardware_db import hardware_list
 from threading import Thread
 from time import sleep
-
-# lock to control access to variable
 dataLock = threading.Lock()
-# thread handler
 yourThread = threading.Thread()
 
 app = Flask(__name__)
@@ -115,7 +112,7 @@ def delete_hardware(hardware_id):
 
 @app.errorhandler(400)
 def not_found_400(error):
-    return make_response("Not found.", 400)
+    return make_response("Not found.", 404)
 
 @app.errorhandler(404)
 def not_found(error):
@@ -129,4 +126,4 @@ def timer(time, hardware):
     hardware[0]['leased'] = False
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=2204, threaded=True, debug=True)
+    app.run(host="0.0.0.0", port=2204, threaded=True)
