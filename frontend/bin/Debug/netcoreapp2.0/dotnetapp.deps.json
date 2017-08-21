@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "5be1b99dfb50edb664cf609045bd298baa57e732"
+    "signature": "e03c2bc2c24d3742426bc563ddf742d6ad46fc1a"
   },
   "compilationOptions": {},
   "targets": {
@@ -9,7 +9,7 @@
       "dotnetapp/1.0.0": {
         "dependencies": {
           "Newtonsoft.Json": "10.0.3",
-          "RestSharp": "105.2.3"
+          "RestSharp.Net2": "1.1.11"
         },
         "runtime": {
           "dotnetapp.dll": {}
@@ -48,9 +48,12 @@
           "lib/netstandard1.3/Newtonsoft.Json.dll": {}
         }
       },
-      "RestSharp/105.2.3": {
+      "RestSharp.Net2/1.1.11": {
+        "dependencies": {
+          "Newtonsoft.Json": "10.0.3"
+        },
         "runtime": {
-          "lib/net46/RestSharp.dll": {}
+          "lib/net20/RestSharp.Net2.dll": {}
         }
       },
       "System.Collections/4.3.0": {
@@ -422,12 +425,12 @@
       "path": "newtonsoft.json/10.0.3",
       "hashPath": "newtonsoft.json.10.0.3.nupkg.sha512"
     },
-    "RestSharp/105.2.3": {
+    "RestSharp.Net2/1.1.11": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-50LkciOclb7Lza9QXqR9reKeUoPlDQiFD4iBdOmd6twOBmTtqEFIOXQgdDdsTHQg4HcGh6EvrM6gN1X72vkJLA==",
-      "path": "restsharp/105.2.3",
-      "hashPath": "restsharp.105.2.3.nupkg.sha512"
+      "sha512": "sha512-P0Im8SSgglj6iiqWcx9gZpe4E6YSagOndTUWZOAnDuGp84eFOCzdUJRm8VsVTFG+Qj+VA1r/QyFzDV/3OYN4EQ==",
+      "path": "restsharp.net2/1.1.11",
+      "hashPath": "restsharp.net2.1.1.11.nupkg.sha512"
     },
     "System.Collections/4.3.0": {
       "type": "package",

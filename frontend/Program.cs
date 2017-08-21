@@ -18,16 +18,32 @@ public static class Program
 {
     public static void Main(string[] args) 
     {
-        RunClient();
+        string ip = "localhost";
+        if (args.Length != 0)
+        {
+            if (args[0].Length != 0)
+                ip = args[0];
+        }
+
+        try
+        {
+            RunClient(ip);
+        } catch (Exception e)
+        {
+            WriteLine("Something went wrong. Make sure that there is connection with the server.");
+        }
+        
     }
 
-   private static void RunClient() 
+   private static void RunClient(string ip) 
    {
-        var client = new RestClient("http://localhost:2204/");
+        var client = new RestClient("http://" + ip + ":2204/");
+        
         bool applicationIsRunning = true;
         do 
         { 
             Clear();
+            WriteLine("Running client with http://" + ip + ":2204/");
             ShowMenu();
             string input = ReadLine();
             switch(input) 

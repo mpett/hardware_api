@@ -250,13 +250,16 @@
           "lib/netstandard1.3/Newtonsoft.Json.dll": {}
         }
       },
-      "RestSharp/105.2.3": {
+      "RestSharp.Net2/1.1.11": {
         "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "4.5.1"
+        },
         "compile": {
-          "lib/net46/RestSharp.dll": {}
+          "lib/net20/RestSharp.Net2.dll": {}
         },
         "runtime": {
-          "lib/net46/RestSharp.dll": {}
+          "lib/net20/RestSharp.Net2.dll": {}
         }
       },
       "System.Collections/4.3.0": {
@@ -1388,40 +1391,14 @@
         "tools/install.ps1"
       ]
     },
-    "RestSharp/105.2.3": {
-      "sha512": "50LkciOclb7Lza9QXqR9reKeUoPlDQiFD4iBdOmd6twOBmTtqEFIOXQgdDdsTHQg4HcGh6EvrM6gN1X72vkJLA==",
+    "RestSharp.Net2/1.1.11": {
+      "sha512": "P0Im8SSgglj6iiqWcx9gZpe4E6YSagOndTUWZOAnDuGp84eFOCzdUJRm8VsVTFG+Qj+VA1r/QyFzDV/3OYN4EQ==",
       "type": "package",
-      "path": "restsharp/105.2.3",
+      "path": "restsharp.net2/1.1.11",
       "files": [
-        "lib/MonoAndroid10/RestSharp.dll",
-        "lib/MonoAndroid10/RestSharp.xml",
-        "lib/MonoTouch10/RestSharp.dll",
-        "lib/MonoTouch10/RestSharp.xml",
-        "lib/Xamarin.iOS10/RestSharp.dll",
-        "lib/Xamarin.iOS10/RestSharp.xml",
-        "lib/net35/RestSharp.dll",
-        "lib/net35/RestSharp.xml",
-        "lib/net4-client/RestSharp.dll",
-        "lib/net4-client/RestSharp.xml",
-        "lib/net4/RestSharp.dll",
-        "lib/net4/RestSharp.xml",
-        "lib/net45/RestSharp.dll",
-        "lib/net45/RestSharp.xml",
-        "lib/net451/RestSharp.dll",
-        "lib/net451/RestSharp.xml",
-        "lib/net452/RestSharp.dll",
-        "lib/net452/RestSharp.xml",
-        "lib/net46/RestSharp.dll",
-        "lib/net46/RestSharp.xml",
-        "lib/sl5/RestSharp.dll",
-        "lib/sl5/RestSharp.xml",
-        "lib/windowsphone8/RestSharp.dll",
-        "lib/windowsphone8/RestSharp.xml",
-        "lib/windowsphone81/RestSharp.dll",
-        "lib/windowsphone81/RestSharp.xml",
-        "readme.txt",
-        "restsharp.105.2.3.nupkg.sha512",
-        "restsharp.nuspec"
+        "lib/net20/RestSharp.Net2.dll",
+        "restsharp.net2.1.1.11.nupkg.sha512",
+        "restsharp.net2.nuspec"
       ]
     },
     "System.Collections/4.3.0": {
@@ -3607,7 +3584,7 @@
     ".NETCoreApp,Version=v2.0": [
       "Microsoft.NETCore.App >= 2.0.0",
       "Newtonsoft.Json >= 10.0.3",
-      "RestSharp >= 105.2.3"
+      "RestSharp.Net2 >= 1.1.11"
     ]
   },
   "packageFolders": {
@@ -3658,9 +3635,9 @@
             "target": "Package",
             "version": "10.0.3"
           },
-          "RestSharp": {
+          "RestSharp.Net2": {
             "target": "Package",
-            "version": "105.2.3"
+            "version": "1.1.11"
           }
         },
         "imports": [
@@ -3676,8 +3653,8 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'RestSharp 105.2.3' was restored using '.NETFramework,Version=v4.6.1' instead of the project target framework '.NETCoreApp,Version=v2.0'. This package may not be fully compatible with your project.",
-      "libraryId": "RestSharp",
+      "message": "Package 'RestSharp.Net2 1.1.11' was restored using '.NETFramework,Version=v4.6.1' instead of the project target framework '.NETCoreApp,Version=v2.0'. This package may not be fully compatible with your project.",
+      "libraryId": "RestSharp.Net2",
       "targetGraphs": [
         ".NETCoreApp,Version=v2.0"
       ]

@@ -1,6 +1,9 @@
 FROM microsoft/dotnet:2.0-sdk
 WORKDIR /app
 
+ENV ASPNETCORE_URLS http://+:2204
+EXPOSE 2204
+
 # copy csproj and restore as distinct layers
 COPY *.csproj ./
 RUN dotnet add package RestSharp --version 105.2.3
