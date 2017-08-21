@@ -2,7 +2,7 @@
 
 A simple server-client for listing and leasing hardware for PC, PS4 and XBOX
 
-## Getting the sample
+## Getting the solution
 
 The easiest way is to clone this repository.
 
