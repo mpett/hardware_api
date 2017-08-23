@@ -104,7 +104,8 @@ public static class Frontend
                             WriteLine("You have not chosen an alternative from the list. Choosing default platform: PC");
                             break;
                     }
-                    try {
+                    try 
+                    {
                         Write("\nWould you kindly type the hardware name: ");
                         string newNameInput = ReadLine();
                         Write("\n\n... and finally the IP: ");
@@ -221,7 +222,7 @@ public static class Frontend
             time_left_on_lease = passedTimeLeftOnLease
         });
         client.ExecuteAsync(request, response => {
-            Console.WriteLine(response.Content);
+            WriteLine(response.Content);
         });
     }
 

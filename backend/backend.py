@@ -60,7 +60,7 @@ def create_hardware():
         "time_left_on_lease" : 0
     }
     hardware_list.append(hardware)
-    return jsonify(hardware), 201
+    return jsonify(hardware)
 
 @app.route('/hardware/api/1.0/lease/', methods=['PUT'])
 def lease_hardware():
