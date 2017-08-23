@@ -90,7 +90,6 @@ def lease_hardware():
     global lease_thread
     lease_thread = threading.Timer(0, timer(time, hardware), ()).start()
     return "Successfully leased hardware."
-    return jsonify(hardware[0])
 
 @app.route('/hardware/api/1.0/hardware_list/<int:hardware_id>', methods = ['DELETE'])
 def delete_hardware(hardware_id):
