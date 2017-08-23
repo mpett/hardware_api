@@ -168,7 +168,10 @@ public static class Frontend
         var request = new RestRequest("hardware/api/1.0/hardware_list", Method.GET);
         IRestResponse response = client.Execute(request);
         var content = response.Content;
-        DeserializeAndDisplayResponse(content);
+        if (content.Equals("Not found."))
+            WriteLine(content);
+        else 
+            DeserializeAndDisplayResponse(content);
     }
 
     private static void ListPlatformFilteredHardware(RestClient client, string platform) 
